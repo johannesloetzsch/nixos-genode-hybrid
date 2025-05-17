@@ -8,7 +8,7 @@ This setup aims to run:
 ## Features
 
 * declarative partitioning with [disko](https://github.com/nix-community/disko)
-* reproducible NixOS installation with flake.nix
+* reproducible NixOS+Bootloader installation with flake.nix
 * Sculpt OS (dual boot) installation from NixOS (or other linux)
 
 
@@ -39,13 +39,14 @@ Declarative partitioning is provided by `./disko.nix` based on [hybrid.nix](http
 
 ```bash
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount disko.nix
+nix shell nixpkgs#parted
 sudo parted /dev/${DISK} name 3 GENODE*
 ```
 
 The last command is required to change the partition label from `disk-main-GENODE` to `GENODE*`
 
 
-### NixOS installation
+### NixOS installation + Bootloader
 
 This repository can be used as `/etc/nixos` of a NixOS to be newly installed. To do so, clone this repo into `/mnt/etc/nixos` after the target root-filesystem is mounted to `/mnt`.
 
@@ -65,10 +66,20 @@ sudo reboot  ## boot into your new installed NixOS
 ```
 
 
+#### Bootloader config
+
+Feel free to change `configuration.nix` to your needs. All required for the dualboot configuration is:
+
+```nix
+imports = [ ./genode-bootloader.nix ];
+```
+
+
 ### Genode installation
 
 To download, extract and copy Sculpt OS into the partition labeled `GENODE*` from any running linux run:
 
 ```bash
+nix shell nixpkgs#p7zip
 sudo ./install_sculpt.sh
 ```

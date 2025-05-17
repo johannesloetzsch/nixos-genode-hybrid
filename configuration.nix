@@ -9,40 +9,25 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./disko.nix
+      ./genode-bootloader.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    devices = ["/dev/disk/by-partlabel/disk-main-ESP"];
-    forceInstall = true;  # allow blocklists
-    extraEntries = ''
-      menuentry 'Genode' {
-        savedefault
-        set root=(hd0,gpt3)
-        #search --set=root --label GENODE --hint hd0,gpt3
-        set gfxpayload="0x0x32"
-        insmod gfxterm
-        terminal_output gfxterm
-        insmod gfx_background
-        insmod png
-        background_image -m center /boot/boot.png
-        configfile /boot/grub/grub.cfg
-      }
-    '';
-    default = "saved";
-    splashImage = "/boot/background_genode.png";
-    splashMode = "normal";
-  };
+  networking.hostName = "nixos-and-genode";  # Define your hostname. Use the same name in flake.nix
 
-  networking.hostName = "nixos-and-genode"; # Define your hostname.
+
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim tmux git
+    wget
+  ];
+
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
@@ -62,8 +47,6 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -94,13 +77,6 @@
 
   # programs.firefox.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim tmux git
-    wget
-  ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -112,8 +88,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "prohibit-password";  ## authorized_keys only
+  # services.openssh.enable = true;
+  # services.openssh.settings.PermitRootLogin = "prohibit-password";  ## authorized_keys only
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -144,6 +120,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
 
