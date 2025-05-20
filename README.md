@@ -1,16 +1,16 @@
 # nixos + genode
 
-This setup aims to run:
-* NixOS VMs within a Genode host
-* Genode VMs within a NixOS host
+This setup supports to run:
+* [x] NixOS VMs within a Genode host
+* [x] Genode VMs within a NixOS host
 
 
 ## Features
 
-* declarative partitioning with [disko](https://github.com/nix-community/disko)
-* reproducible NixOS+Bootloader installation with flake.nix
-* Sculpt OS (dual boot) installation from NixOS (or other linux)
-
+* [x] declarative partitioning with [disko](https://github.com/nix-community/disko)
+* [x] reproducible NixOS+Bootloader installation with flake.nix
+* [x] Sculpt OS (dual boot) installation from NixOS (or other linux)
+* [x] Run the native linux installation inside of Genode (vbox6-block)
 
 ## Details
 
@@ -83,3 +83,15 @@ To download, extract and copy Sculpt OS into the partition labeled `GENODE*` fro
 nix shell nixpkgs#p7zip
 sudo ./install_sculpt.sh
 ```
+
+
+### Configure Genode
+
+If you want to run the existing linux on top of genode, you can use the config provided by this repo:
+
+```bash
+mount /dev/disk/by-partlabel/GENODE* $GENODE_MOUNTPOINT
+cp -r ./genode/* $GENODE_MOUNTPOINT/
+```
+
+See [genode/README.md](./genode/README.md)

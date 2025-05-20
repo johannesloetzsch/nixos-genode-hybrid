@@ -1,0 +1,27 @@
+# Disk DescriptorFile
+version=1
+CID=62e450fa
+parentCID=ffffffff
+createType="partitionedDevice"
+
+# Extent description
+RW 1 FLAT "mbr-pt.vmdk" 0
+RW 2047 FLAT "mbr-pt.vmdk" 1
+RW 2048 FLAT "/dev/sda1" 0
+RW 1048576 FLAT "/dev/sda2" 0
+RW 209715200 ZERO 
+RW 289349632 FLAT "/dev/sda4" 0
+RW 688 ZERO 
+
+# The disk Data Base 
+#DDB
+
+ddb.virtualHWVersion = "4"
+ddb.adapterType="ide"
+ddb.geometry.cylinders="16383"
+ddb.geometry.heads="16"
+ddb.geometry.sectors="63"
+ddb.uuid.image="3c13177f-57fd-4ee6-b71c-fce4e72d5ed5"
+ddb.uuid.parent="00000000-0000-0000-0000-000000000000"
+ddb.uuid.modification="00000000-0000-0000-0000-000000000000"
+ddb.uuid.parentmodification="00000000-0000-0000-0000-000000000000"

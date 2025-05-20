@@ -29,6 +29,19 @@
   ];
 
 
+  #virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.guest = {
+    enable = true;
+    vboxsf = true;  ## allows: mount.vboxsf shared /mnt/
+  };
+
+
+  services.xserver = {
+    displayManager.lightdm.enable = true;
+    services.xserver.desktopManager.mate.enable = true;
+  };
+
+
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 

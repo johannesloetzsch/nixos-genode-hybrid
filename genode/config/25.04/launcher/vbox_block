@@ -1,0 +1,64 @@
+<launcher ram="2500M" pkg="local/pkg/vbox6-block-3/2025-04-14" priority="-2">
+	<route>
+		<service name="File_system" label_prefix="vm ->">
+			<child name="ahci-0.3.fs" prepend_resource="/vm/block"/>
+		</service>
+		<service name="File_system" label_prefix="shared ->">
+			<child name="shared_fs"/>
+		</service>
+		<service name="Block" label="sda1">
+			<child name="ahci-0.part" label="1"/>
+		</service>
+		<service name="Block" label="sda2">
+			<child name="ahci-0.part" label="2"/>
+		</service>
+		<service name="Block" label="sda4">
+			<child name="ahci-0.part" label="4"/>
+		</service>
+		<service name="VM">
+			<parent/>
+		</service>
+		<service name="Gpu">
+			<child name="intel_gpu"/>
+		</service>
+		<service name="Gui">
+			<child name="wm"/>
+		</service>
+		<service name="Nic">
+			<child name="nic_router"/>
+		</service>
+		<service name="ROM" label="capslock">
+			<parent label="capslock"/>
+		</service>
+		<service name="ROM" label="platform_info">
+			<parent label="platform_info"/>
+		</service>
+		<service name="Report" label_last="shape">
+			<parent/>
+		</service>
+		<service name="Report" label_last="clipboard">
+			<parent/>
+		</service>
+		<service name="ROM" label_last="clipboard">
+			<parent/>
+		</service>
+		<service name="ROM" label="mesa_gpu.lib.so">
+			<child name="black_hole"/>
+		</service>
+		<service name="RM">
+			<parent/>
+		</service>
+		<service name="Rtc">
+			<child name="system_clock"/>
+		</service>
+		<service name="Usb">
+			<child name="usb"/>
+		</service>
+		<service name="Play">
+			<child name="black_hole"/>
+		</service>
+		<service name="Record">
+			<child name="black_hole"/>
+		</service>
+	</route>
+</launcher>
