@@ -1,19 +1,23 @@
-<launcher ram="2500M" pkg="local/pkg/vbox6-block-3/2025-04-14" priority="-2">
+<launcher ram="4300M" pkg="local/pkg/vbox6-block/2025-04-14" priority="-2">
 	<route>
 		<service name="File_system" label_prefix="vm ->">
-			<child name="ahci-0.3.fs" prepend_resource="/vm/block"/>
+			<!--<child name="ahci-0.3.fs" prepend_resource="/vm/block"/>-->
+			<child name="nvme-1.3.fs" prepend_resource="/vm/block"/>
 		</service>
 		<service name="File_system" label_prefix="shared ->">
 			<child name="shared_fs"/>
 		</service>
 		<service name="Block" label="sda1">
-			<child name="ahci-0.part" label="1"/>
+			<!--<child name="ahci-0.part" label="1"/>-->
+			<child name="nvme-1.part" label="1"/>
 		</service>
 		<service name="Block" label="sda2">
-			<child name="ahci-0.part" label="2"/>
+			<!--<child name="ahci-0.part" label="2"/>-->
+			<child name="nvme-1.part" label="2"/>
 		</service>
 		<service name="Block" label="sda4">
-			<child name="ahci-0.part" label="4"/>
+			<!--<child name="ahci-0.part" label="4"/>-->
+			<child name="nvme-1.part" label="4"/>
 		</service>
 		<service name="VM">
 			<parent/>

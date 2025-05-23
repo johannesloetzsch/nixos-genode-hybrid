@@ -18,7 +18,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = [ "umask=0077" ] ++ [ "nofail" ];  ## nofail should only be used when mbr-pt.vmdk doesn't contain the expected partlabels
               };
             };
             GENODE = {

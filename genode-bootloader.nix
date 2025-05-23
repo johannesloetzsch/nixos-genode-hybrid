@@ -12,7 +12,7 @@
     enable = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
-    devices = ["/dev/disk/by-partlabel/disk-ssd-ESP"];
+    devices = ["/dev/disk/by-partlabel/disk-main-ESP"];
     forceInstall = true;  # allow blocklists
     extraEntries = ''
       menuentry 'Genode' {
@@ -29,7 +29,8 @@
       }
     '';
     default = "saved";
-    splashImage = "/boot/background_genode.png";
+    #splashImage = "/boot/background_genode.png";
     splashMode = "normal";
+    configurationLimit = 10;  ## prevent /boot/kernels from running out of space
   };
 }

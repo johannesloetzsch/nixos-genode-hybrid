@@ -18,7 +18,7 @@ A vm using block devices (for bpt, efi, root) to start a dualboot-linux on top o
         <LongMode enabled="true"/>
         <HardwareVirtExLargePages enabled="false"/>
       </CPU>
-      <Memory RAMSize="2048"/>
+      <Memory RAMSize="4096"/>
       <Paravirt provider="KVM"/>
       <Display controller="VBoxSVGA" VRAMSize="20"/>
       <BIOS>

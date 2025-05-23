@@ -8,17 +8,17 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./disko.nix
       ./genode-bootloader.nix
     ];
 
-  networking.hostName = "nixos-and-genode";  # Define your hostname. Use the same name in flake.nix
+  networking.hostName = "nixos-and-genode";  ## Define your hostname. Use the same name in flake.nix
+  networking.hostId = "57d429f6";  ## Required for zfs
 
 
 
   # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.wireless.enable = true;  ## Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  ## Easiest to use and most distros use this by default.
 
 
   # List packages installed in system profile. To search, run:
@@ -26,24 +26,57 @@
   environment.systemPackages = with pkgs; [
     vim tmux git
     wget
+    htop atop
+    chromium
   ];
 
 
   #virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest = {
-    enable = true;
+    enable = true;  ## required for: <Display controller="VBoxSVGA"/> in machine.vbox6
     vboxsf = true;  ## allows: mount.vboxsf shared /mnt/
   };
 
 
-  services.xserver = {
-    displayManager.lightdm.enable = true;
-    services.xserver.desktopManager.mate.enable = true;
+  ## fallback in case mbr-pt.vmdk doesn't contain the expected partlabels
+  boot.initrd = {
+    preLVMCommands = lib.mkBefore ''
+      echo @@@ preLVMCommands @@@
+      [ -e /dev/sda4 ] && ! [ -e /dev/disk/by-partlabel/disk-main-luks ] && ln -s /dev/sda4 /dev/disk/by-partlabel/disk-main-luks && ls -l /dev/disk/by-partlabel/disk-main-luks
+      [ -e /dev/sda2 ] && ! [ -e /dev/disk/by-partlabel/disk-main-ESP ]  && ln -s /dev/sda2 /dev/disk/by-partlabel/disk-main-ESP  && ls -l /dev/disk/by-partlabel/disk-main-ESP
+      echo @@@ preLVMCommands @@@
+    '';
+    postResumeCommands = lib.mkAfter ''
+      echo @@@ postResumeCommands @@@
+      ## here we could change the zfs-clone to be used as /
+      cat /proc/cmdline
+      cat /nix/store/*initrd-fsinfo
+      echo @@@ postResumeCommands @@@
+    '';
   };
 
 
+  ## Nix
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
+
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+    desktopManager.mate.enable = true;
+  };
+
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users."user" = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [];
+  };
+
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Amsterdam";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -79,15 +112,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
-
   # programs.firefox.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,8 +125,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-  # services.openssh.settings.PermitRootLogin = "prohibit-password";  ## authorized_keys only
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "prohibit-password";  ## authorized_keys only
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -134,4 +158,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
