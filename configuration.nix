@@ -37,6 +37,15 @@
     vboxsf = true;  ## allows: mount.vboxsf shared /mnt/
   };
 
+  systemd.services."virtualbox".enable = false;  ## due to ERR_NOT_SUPPORTED
+
+  fileSystems."/genode" = {
+    fsType = "vboxsf";
+    device = "shared";
+    noCheck = true;
+    options = [ "nofail" ];
+  };
+
 
   ## fallback in case mbr-pt.vmdk doesn't contain the expected partlabels
   boot.initrd = {
