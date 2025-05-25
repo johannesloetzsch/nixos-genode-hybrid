@@ -48,11 +48,29 @@
     '';
     postResumeCommands = lib.mkAfter ''
       echo @@@ postResumeCommands @@@
-      ## here we could change the zfs-clone to be used as /
+      ## We change the zfs-clone to be used as / by modifying initrd-fsinfo depending on /proc/cmdline
       cat /proc/cmdline
+
+      for o in $(cat /proc/cmdline); do
+        case $o in
+          fsinfo.root=*)
+            set -- $(IFS==; echo $o)
+            DEV=$2
+            DEV_ORIG="zroot/root"  ## TODO for now it is hardcoded, take it from fsinfo
+
+            sed -i "s@^$DEV_ORIG\$@$DEV@" /nix/store/*initrd-fsinfo
+            ;;
+        esac
+      done
+
       cat /nix/store/*initrd-fsinfo
       echo @@@ postResumeCommands @@@
     '';
+  };
+
+
+  specialisation."root2".configuration = {
+    boot.kernelParams = [ "fsinfo.root=zroot/root2" ];
   };
 
 

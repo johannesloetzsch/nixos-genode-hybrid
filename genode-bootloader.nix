@@ -14,6 +14,7 @@
     efiInstallAsRemovable = true;
     devices = ["/dev/disk/by-partlabel/disk-main-ESP"];
     forceInstall = true;  # allow blocklists
+    extraEntriesBeforeNixOS = true;
     extraEntries = ''
       menuentry 'Genode' {
         savedefault
