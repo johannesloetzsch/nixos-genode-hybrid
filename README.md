@@ -7,15 +7,19 @@ This setup supports to run:
 
 ## Features
 
-* [x] declarative partitioning with [disko](https://github.com/nix-community/disko)
-* [x] reproducible NixOS+Bootloader installation with flake.nix
-* [x] Sculpt OS (dual boot) installation from NixOS (or other linux)
-* [x] Run the native linux installation inside of Genode (vbox6-block)
+* [x] **declarative partitioning** with [disko](https://github.com/nix-community/disko)
+  * [x] *optional* luks-encryption (fido2)
+  * [x] *optional* zfs (with specialised bootloader entries per snapshot/clone)
+* [x] **reproducible installation** of NixOS+Bootloader with `flake.nix`
+* [x] **Sculpt OS (dual boot)** installation from NixOS (or other linux)
+  * [x] *optional* Neo2-Keyboard-Layout
+* [x] Run the native linux system inside of **Genode hypervisor** (vbox6-block)
+  * [x] *optional* access to genode-partition (vboxsf)
+  * [x] *optional* SSH from outside via `nic_router` into linux
 
 ## Details
 
 The instructions assume you are booted into a NixOS-Live-System or another system with Nix.
-
 
 ### Partitioning
 

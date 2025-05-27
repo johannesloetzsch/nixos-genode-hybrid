@@ -1,0 +1,216 @@
+<chargen>
+	<map>
+		<!-- non-printable -->
+
+		<key name="KEY_ESC" ascii="27"/>
+		<key name="KEY_BACKSPACE" ascii="8"/>
+		<key name="KEY_TAB" ascii="9"/>
+		<key name="KEY_ENTER" ascii="10"/>
+		<key name="KEY_KPENTER" ascii="10"/>
+		<key name="KEY_DELETE" ascii="127"/>
+
+		<!-- printable -->
+
+		<key name="KEY_1" code="0x0031"/>	<!-- 1 -->
+		<key name="KEY_2" code="0x0032"/>	<!-- 2 -->
+		<key name="KEY_3" code="0x0033"/>	<!-- 3 -->
+		<key name="KEY_4" code="0x0034"/>	<!-- 4 -->
+		<key name="KEY_5" code="0x0035"/>	<!-- 5 -->
+		<key name="KEY_6" code="0x0036"/>	<!-- 6 -->
+		<key name="KEY_7" code="0x0037"/>	<!-- 7 -->
+		<key name="KEY_8" code="0x0038"/>	<!-- 8 -->
+		<key name="KEY_9" code="0x0039"/>	<!-- 9 -->
+		<key name="KEY_0" code="0x0030"/>	<!-- 0 -->
+		<key name="KEY_MINUS" code="0x00df"/>	<!-- ß => - -->
+		<key name="KEY_EQUAL" code="0x00b4"/>	<!-- dead_grave => ` -->
+
+		<key name="KEY_Q" code="0x0078"/>	<!-- q => x -->
+		<key name="KEY_W" code="0x0076"/>	<!-- w => v -->
+		<key name="KEY_E" code="0x006c"/>	<!-- e => l -->
+		<key name="KEY_R" code="0x0063"/>	<!-- r => c -->
+		<key name="KEY_T" code="0x0077"/>	<!-- t => w -->
+		<key name="KEY_Y" code="0x006b"/>	<!-- z => k -->
+		<key name="KEY_U" code="0x0068"/>	<!-- u => h -->
+		<key name="KEY_I" code="0x0067"/>	<!-- i => g -->
+		<key name="KEY_O" code="0x0066"/>	<!-- o => f -->
+		<key name="KEY_P" code="0x0071"/>	<!-- p => q -->
+		<key name="KEY_LEFTBRACE" code="0x00df"/>	<!-- ü => - -->
+		<key name="KEY_RIGHTBRACE" code="0x002b"/>	<!-- + => ´ -->
+
+		<key name="KEY_A" code="0x0075"/>	<!-- a => u -->
+		<key name="KEY_S" code="0x0069"/>	<!-- s => i -->
+		<key name="KEY_D" code="0x0061"/>	<!-- d => a -->
+		<key name="KEY_F" code="0x0065"/>	<!-- f => e -->
+		<key name="KEY_G" code="0x006f"/>	<!-- g => o -->
+		<key name="KEY_H" code="0x0073"/>	<!-- h => s -->
+		<key name="KEY_J" code="0x006e"/>	<!-- j => n -->
+		<key name="KEY_K" code="0x0072"/>	<!-- k => r -->
+		<key name="KEY_L" code="0x0074"/>	<!-- l => t -->
+		<key name="KEY_SEMICOLON" code="0x0064"/>	<!-- ö => d -->
+		<key name="KEY_APOSTROPHE" code="0x0079"/>	<!-- ä => y -->
+		<!-- <key name="KEY_BACKSLASH" code="0x0023"/> -->	<!-- < => CAPSLOCK -->
+
+		<!-- <key name="KEY_102ND" code="0x003c"/> -->	<!-- < => ALTGR -->
+		<key name="KEY_Z" code="0x00fc"/>	<!-- y => ü -->
+		<key name="KEY_X" code="0x00f6"/>	<!-- x => ö -->
+		<key name="KEY_C" code="0x00e4"/>	<!-- c => ä -->
+		<key name="KEY_V" code="0x0070"/>	<!-- v => p -->
+		<key name="KEY_B" code="0x007a"/>	<!-- b => z -->
+		<key name="KEY_N" code="0x0062"/>	<!-- n => b -->
+		<key name="KEY_M" code="0x006d"/>	<!-- m => m -->
+		<key name="KEY_COMMA" code="0x002c"/>	<!-- , => , -->
+		<key name="KEY_DOT" code="0x002e"/>	<!-- . => . -->
+		<key name="KEY_SLASH" code="0x006a"/>	<!-- - => j -->
+
+		<key name="KEY_SPACE" code="0x0020"/>	<!--   -->
+
+		<!-- <key name="KEY_GRAVE" code="0x005e"/> -->	<!--  -->
+		<key name="KEY_KPASTERISK" code="0x002a"/>	<!-- * -->
+		<key name="KEY_KP7" code="0x0037"/>	<!-- 7 -->
+		<key name="KEY_KP8" code="0x0038"/>	<!-- 8 -->
+		<key name="KEY_KP9" code="0x0039"/>	<!-- 9 -->
+		<key name="KEY_KPMINUS" code="0x002d"/>	<!-- - -->
+		<key name="KEY_KP4" code="0x0034"/>	<!-- 4 -->
+		<key name="KEY_KP5" code="0x0035"/>	<!-- 5 -->
+		<key name="KEY_KP6" code="0x0036"/>	<!-- 6 -->
+		<key name="KEY_KPPLUS" code="0x002b"/>	<!-- + -->
+		<key name="KEY_KP1" code="0x0031"/>	<!-- 1 -->
+		<key name="KEY_KP2" code="0x0032"/>	<!-- 2 -->
+		<key name="KEY_KP3" code="0x0033"/>	<!-- 3 -->
+		<key name="KEY_KP0" code="0x0030"/>	<!-- 0 -->
+		<key name="KEY_KPDOT" code="0x002c"/>	<!-- , -->
+		<key name="KEY_KPSLASH" code="0x002f"/>	<!-- / -->
+	</map>
+
+	<!-- SHIFT -->
+	<map mod1="true" mod2="false" mod3="false" mod4="false">
+		<key name="KEY_1" code="0x00b0"/>	<!-- ° -->
+		<key name="KEY_2" code="0x00a7"/>	<!-- § -->
+		<key name="KEY_3" code="0x2113"/>	<!-- liter -->
+		<key name="KEY_4" code="0x00bb"/>	<!-- » -->
+		<key name="KEY_5" code="0x00ab"/>	<!-- « -->
+		<key name="KEY_6" code="0x0024"/>	<!-- $ -->
+		<key name="KEY_7" code="0x20ac"/>	<!-- euro -->
+		<key name="KEY_8" code="0x201e"/>	<!-- doublelowquotemark -->
+		<key name="KEY_9" code="0x201c"/>	<!-- leftdoublequotemark -->
+		<key name="KEY_0" code="0x201d"/>	<!-- rightdoublequotemark -->
+		<key name="KEY_MINUS" code="0x2014"/>	<!-- ß => emdash -->
+		<key name="KEY_EQUAL" code="0x0060"/>	<!-- ` -->
+
+		<key name="KEY_Q" code="0x0058"/>	<!-- q => x -->
+		<key name="KEY_W" code="0x0056"/>	<!-- w => v -->
+		<key name="KEY_E" code="0x004c"/>	<!-- e => l -->
+		<key name="KEY_R" code="0x0043"/>	<!-- r => c -->
+		<key name="KEY_T" code="0x0057"/>	<!-- t => w -->
+		<key name="KEY_Y" code="0x004b"/>	<!-- z => k -->
+		<key name="KEY_U" code="0x0048"/>	<!-- u => h -->
+		<key name="KEY_I" code="0x0047"/>	<!-- i => g -->
+		<key name="KEY_O" code="0x0046"/>	<!-- o => f -->
+		<key name="KEY_P" code="0x0051"/>	<!-- p => q -->
+		<key name="KEY_LEFTBRACE" code="0x1e9e"/>	<!-- ü => ẞ -->
+		<key name="KEY_RIGHTBRACE" code="0x002b"/>	<!-- + => ~ -->
+
+		<key name="KEY_A" code="0x0055"/>	<!-- a => u -->
+		<key name="KEY_S" code="0x0049"/>	<!-- s => i -->
+		<key name="KEY_D" code="0x0041"/>	<!-- d => a -->
+		<key name="KEY_F" code="0x0045"/>	<!-- f => e -->
+		<key name="KEY_G" code="0x004f"/>	<!-- g => o -->
+		<key name="KEY_H" code="0x0053"/>	<!-- h => s -->
+		<key name="KEY_J" code="0x004e"/>	<!-- j => n -->
+		<key name="KEY_K" code="0x0052"/>	<!-- k => r -->
+		<key name="KEY_L" code="0x0054"/>	<!-- l => t -->
+		<key name="KEY_SEMICOLON" code="0x0044"/>	<!-- ö => d -->
+		<key name="KEY_APOSTROPHE" code="0x0059"/>	<!-- ä => y -->
+		<!-- <key name="KEY_BACKSLASH" code="0x0023"/> -->	<!-- < => CAPSLOCK -->
+
+		<!-- <key name="KEY_102ND" code="0x003c"/> -->	<!-- < => ALTGR -->
+		<key name="KEY_Z" code="0x00cc"/>	<!-- y => ü -->
+		<key name="KEY_X" code="0x00c6"/>	<!-- x => ö -->
+		<key name="KEY_C" code="0x00c4"/>	<!-- c => ä -->
+		<key name="KEY_V" code="0x0050"/>	<!-- v => p -->
+		<key name="KEY_B" code="0x005a"/>	<!-- b => z -->
+		<key name="KEY_N" code="0x0042"/>	<!-- n => b -->
+		<key name="KEY_M" code="0x004d"/>	<!-- m => m -->
+		<key name="KEY_COMMA" code="0x2013"/>	<!-- , => endash -->
+		<key name="KEY_DOT" code="0x29bf"/>	<!-- . => enfilledcirclebullet -->
+		<key name="KEY_SLASH" code="0x004a"/>	<!-- - => j -->
+
+		<key name="KEY_SPACE" code="0x0020"/>	<!--   -->
+	</map>
+
+	<!-- ALTGR -->
+	<map mod1="false" mod2="false" mod3="true" mod4="false">
+		<key name="KEY_W" ascii="8"/> 	<!-- w => BACKSPACE -->
+		<key name="KEY_Z" ascii="27"/>	<!-- y => ESC -->
+		<key name="KEY_V" ascii="10"/>	<!-- v => ENTER -->
+	</map>
+
+	<!-- CAPSLOCK -->
+	<map mod1="false" mod2="false" mod3="false" mod4="true">
+		<key name="KEY_1" code="0x00b0"/>	<!-- ° -->
+		<key name="KEY_2" code="0x00a7"/>	<!-- § -->
+		<key name="KEY_3" code="0x2113"/>	<!-- liter -->
+		<key name="KEY_4" code="0x00bb"/>	<!-- » -->
+		<key name="KEY_5" code="0x00ab"/>	<!-- « -->
+		<key name="KEY_6" code="0x0024"/>	<!-- $ -->
+		<key name="KEY_7" code="0x20ac"/>	<!-- euro -->
+		<key name="KEY_8" code="0x201e"/>	<!-- doublelowquotemark -->
+		<key name="KEY_9" code="0x201c"/>	<!-- leftdoublequotemark -->
+		<key name="KEY_0" code="0x201d"/>	<!-- rightdoublequotemark -->
+		<key name="KEY_MINUS" code="0x2014"/>	<!-- ß => emdash -->
+		<key name="KEY_EQUAL" code="0x0060"/>	<!-- ` -->
+
+		<key name="KEY_Q" code="0x2026"/>	<!-- q => ellipsis -->
+		<key name="KEY_W" code="0x005f"/>	<!-- w => _ -->
+		<key name="KEY_E" code="0x005b"/>	<!-- e => ( -->
+		<key name="KEY_R" code="0x005d"/>	<!-- r => ) -->
+		<key name="KEY_T" code="0x005e"/>	<!-- t => ^ -->
+		<key name="KEY_Y" code="0x0021"/>	<!-- z => ! -->
+		<key name="KEY_U" code="0x003c"/>	<!-- u => < -->
+		<key name="KEY_I" code="0x003e"/>	<!-- i => > -->
+		<key name="KEY_O" code="0x003d"/>	<!-- o => = -->
+		<key name="KEY_P" code="0x0026"/>	<!-- p => & -->
+		<key name="KEY_LEFTBRACE" code="0x017f"/>	<!-- ü => u017f -->
+		<key name="KEY_RIGHTBRACE" code="0x002b"/>	<!-- + -->
+
+		<key name="KEY_A" code="0x005c"/>	<!-- a => \ -->
+		<key name="KEY_S" code="0x002f"/>	<!-- s => / -->
+		<key name="KEY_D" code="0x007b"/>	<!-- d => { -->
+		<key name="KEY_F" code="0x007d"/>	<!-- f => } -->
+		<key name="KEY_G" code="0x002a"/>	<!-- g => * -->
+		<key name="KEY_H" code="0x003f"/>	<!-- h => ? -->
+		<key name="KEY_J" code="0x0028"/>	<!-- j => ( -->
+		<key name="KEY_K" code="0x0029"/>	<!-- k => ) -->
+		<key name="KEY_L" code="0x002d"/>	<!-- l => - -->
+		<key name="KEY_SEMICOLON" code="0x003a"/>	<!-- ö => : -->
+		<key name="KEY_APOSTROPHE" code="0x0040"/>	<!-- ä => @ -->
+		<!-- <key name="KEY_BACKSLASH" code="0x0023"/> -->	<!-- < => CAPSLOCK -->
+
+		<!-- <key name="KEY_102ND" code="0x003c"/> -->	<!-- < => ALTGR -->
+		<key name="KEY_Z" code="0x0023"/>	<!-- y => # -->
+		<key name="KEY_X" code="0x0024"/>	<!-- x => $ -->
+		<key name="KEY_C" code="0x007c"/>	<!-- c => | -->
+		<key name="KEY_V" code="0x007e"/>	<!-- v => ~ -->
+		<key name="KEY_B" code="0x0060"/>	<!-- b => ` -->
+		<key name="KEY_N" code="0x002b"/>	<!-- n => + -->
+		<key name="KEY_M" code="0x0025"/>	<!-- m => % -->
+		<key name="KEY_COMMA" code="0x0022"/>	<!-- , => " -->
+		<key name="KEY_DOT" code="0x0027"/>	<!-- . => ' -->
+		<key name="KEY_SLASH" code="0x003b"/>	<!-- - => ; -->
+	</map>
+
+	<!-- SHIFT-ALTGR -->
+
+	<!-- SHIFT-CAPSLOCK -->
+	<map mod1="true" mod2="false" mod3="false" mod4="true">
+	</map>
+
+	<!-- ALTGR-CAPSLOCK -->
+	<map mod1="false" mod2="false" mod3="true" mod4="true">
+	</map>
+
+	<!-- SHIFT-ALTGR-CAPSLOCK -->
+
+	<!-- dead-key / compose sequences -->
+</chargen>
+

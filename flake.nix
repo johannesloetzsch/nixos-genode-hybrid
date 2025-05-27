@@ -13,6 +13,7 @@
       #disko.nixosModules.disko ./disko.nix
       disko.nixosModules.disko ./disko_luks_zfs.nix
       ./configuration.nix
+      ./nix/opinionated/neo2-keyboard.nix
     ];
   };
 }
