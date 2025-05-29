@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<VirtualBox xmlns="http://www.virtualbox.org/" version="1.18-freebsd">
+  <Machine uuid="{37ab43a5-38d8-4491-93f5-5b0b077f5c32}" name="@@name@@" OSType="Linux" snapshotFolder="snapshots" lastStateChange="2025-05-31T02:37:58Z">
+    <MediaRegistry>
+      <HardDisks>
+        <HardDisk uuid="{@@uuid@@}" location="@@name@@.vmdk" format="VMDK" type="Normal"/>
+      </HardDisks>
+      <DVDImages>
+        <Image uuid="{81763434-9a51-49e8-9444-528a5a28c4bc}" location="rescue.iso"/>
+      </DVDImages>
+    </MediaRegistry>
+    <Hardware>
+      <CPU count="2">
+        <PAE enabled="true"/>
+        <LongMode enabled="true"/>
+        <HardwareVirtExLargePages enabled="false"/>
+      </CPU>
+      <Memory RAMSize="4096"/>
+      <Paravirt provider="KVM"/>
+      <Display controller="VBoxSVGA" VRAMSize="20"/>
+      <BIOS>
+        <IOAPIC enabled="true"/>
+      </BIOS>
+      <USB>
+        <Controllers>
+          <Controller name="OHCI" type="OHCI"/>
+        </Controllers>
+      </USB>
+      <Network>
+        <Adapter slot="0" enabled="true" MACAddress="0800271D7901" type="82540EM">
+          <BridgedInterface/>
+        </Adapter>
+      </Network>
+      <LPT>
+        <Port slot="1" enabled="false" IOBase="0x378" IRQ="7"/>
+      </LPT>
+      <AudioAdapter controller="HDA" driver="OSS"/>
+      <RTC localOrUTC="UTC"/>
+      <SharedFolders>
+        <SharedFolder name="shared" hostPath="/shared" writable="true" autoMount="true"/>
+      </SharedFolders>
+      <Clipboard mode="Bidirectional"/>
+      <StorageControllers>
+        <StorageController name="SATA" type="AHCI" PortCount="4" useHostIOCache="true" Bootable="true" IDE0MasterEmulationPort="0" IDE0SlaveEmulationPort="1" IDE1MasterEmulationPort="2" IDE1SlaveEmulationPort="3">
+          <AttachedDevice type="HardDisk" hotpluggable="false" port="0" device="0">
+            <Image uuid="{@@uuid@@}"/>
+          </AttachedDevice>
+          <AttachedDevice passthrough="false" tempeject="true" type="DVD" hotpluggable="false" port="3" device="0">
+            <Image uuid="{81763434-9a51-49e8-9444-528a5a28c4bc}"/>
+          </AttachedDevice>
+        </StorageController>
+      </StorageControllers>
+    </Hardware>
+  </Machine>
+</VirtualBox>

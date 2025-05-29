@@ -24,14 +24,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim tmux git
+    tmux git
     wget
     htop atop
     chromium
   ];
 
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
-  #virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  boot.blacklistedKernelModules = [ "kvm_intel" ];
+
   virtualisation.virtualbox.guest = {
     enable = true;  ## required for: <Display controller="VBoxSVGA"/> in machine.vbox6
     vboxsf = true;  ## allows: mount.vboxsf shared /mnt/
@@ -98,7 +104,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."user" = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "vboxusers" ];
     packages = with pkgs; [];
   };
 

@@ -1,0 +1,56 @@
+<launcher ram="4500M" pkg="genodelabs/pkg/vbox6/2025-04-28" priority="-2">
+  <affinity xpos="0" ypos="0" width="2" height="1"/><!-- 2 physical cores, 1 ht each -->
+	<route>
+		<service name="File_system" label_prefix="vm ->">
+			<child name="default_fs_rw" prepend_resource="/vm/@@name@@"/>
+		</service>
+		<service name="File_system" label_prefix="shared ->">
+			<child name="shared_fs"/>
+		</service>
+		<service name="VM">
+			<parent/>
+		</service>
+		<service name="Gpu">
+			<child name="intel_gpu"/>
+		</service>
+		<service name="Gui">
+			<child name="wm"/>
+		</service>
+		<service name="Nic">
+			<child name="nic_router"/>
+		</service>
+		<service name="ROM" label="capslock">
+			<parent label="capslock"/>
+		</service>
+		<service name="ROM" label="platform_info">
+			<parent label="platform_info"/>
+		</service>
+		<service name="Report" label="shape">
+			<child name="wm"/>
+		</service>
+		<service name="Report" label_last="clipboard">
+			<parent/>
+		</service>
+		<service name="ROM" label_last="clipboard">
+			<parent/>
+		</service>
+		<service name="ROM" label="mesa_gpu.lib.so">
+			<child name="black_hole"/>
+		</service>
+		<service name="RM">
+			<parent/>
+		</service>
+		<service name="Rtc">
+			<child name="system_clock"/>
+		</service>
+		<service name="Usb">
+			<child name="usb"/>
+		</service>
+		<service name="Play">
+			<child name="black_hole"/>
+		</service>
+		<service name="Record">
+			<child name="black_hole"/>
+		</service>
+	</route>
+</launcher>
