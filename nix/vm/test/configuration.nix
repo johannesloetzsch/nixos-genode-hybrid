@@ -8,12 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../genode-bootloader.nix  ## we need legacy boot
+      ../../../dualboot/genode-bootloader.nix  ## we need legacy boot
     ];
 
   #boot.loader.grub.devices = [ "/dev/sda" ];
 
-  networking.hostName = "example-vm";
+  networking.hostName = "test";
   users.users.root.password = "changeme";
 
 

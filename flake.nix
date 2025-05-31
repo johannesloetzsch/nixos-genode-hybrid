@@ -15,22 +15,40 @@
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    vbox = import ./nix/vbox pkgs;
+    vbox = import ./vbox pkgs;
   in
   {
+
+    ## The dualboot nixos host (bare metal nix or dualboot into the same machine on top of genode)
     nixosConfigurations."nixos-and-genode" = nixpkgs.legacyPackages.${system}.nixos [
-      #disko.nixosModules.disko ./disko.nix
-      disko.nixosModules.disko ./disko_luks_zfs.nix
-      ./configuration.nix
-      ./nix/opinionated/neo2-keyboard.nix
+      #disko.nixosModules.disko ./dualboot/disko.nix
+      disko.nixosModules.disko ./dualboot/disko_luks_zfs.nix
+      ./dualboot/configuration.nix
+      ./nix/shared/opinionated/neo2-keyboard.nix
     ];
 
-    nixosModules."vm".imports = [
+
+    ## VMs
+
+    nixosModules."vm_example".imports = [
       nixos-generators.nixosModules.all-formats
-      { virtualisation.diskSize = 20*1024; }  ## 20GB
-      ./vm/configuration.nix
+      { virtualisation.diskSize = 20*1024; }  ## 20 GB
+      ./nix/vm/example/configuration.nix
     ];
-    nixosConfigurations."vm" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."vm"];
-    packages.${system}."vm" = vbox self.nixosConfigurations."vm".config;
+    nixosConfigurations."vm_example" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."vm_example"];
+
+    nixosModules."vm_test".imports = [
+      nixos-generators.nixosModules.all-formats
+      { virtualisation.diskSize = 20*1024; }  ## 20 GB
+      ./nix/vm/test/configuration.nix
+    ];
+    nixosConfigurations."vm_test" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."vm_example"];
+
+
+    packages.${system} = {
+      vm_example = vbox self.nixosConfigurations."vm_example".config;
+      vm_test = vbox self.nixosConfigurations."vm_example".config;
+    };
+
   };
 }
