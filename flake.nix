@@ -30,24 +30,32 @@
 
     ## VMs
 
-    nixosModules."vm_example".imports = [
+    nixosModules."example".imports = [
       nixos-generators.nixosModules.all-formats
       { virtualisation.diskSize = 20*1024; }  ## 20 GB
       ./nix/vm/example/configuration.nix
     ];
-    nixosConfigurations."vm_example" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."vm_example"];
+    nixosConfigurations."example" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."example"];
 
-    nixosModules."vm_test".imports = [
+    nixosModules."test".imports = [
       nixos-generators.nixosModules.all-formats
-      { virtualisation.diskSize = 20*1024; }  ## 20 GB
+      { virtualisation.diskSize = 20*1024; }
       ./nix/vm/test/configuration.nix
     ];
-    nixosConfigurations."vm_test" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."vm_example"];
+    nixosConfigurations."test" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."test"];
+
+    nixosModules."system-shell".imports = [
+      nixos-generators.nixosModules.all-formats
+      { virtualisation.diskSize = 20*1024; }
+      ./nix/vm/system-shell/configuration.nix
+    ];
+    nixosConfigurations."system-shell" = nixpkgs.legacyPackages.${system}.nixos [self.nixosModules."system-shell"];
 
 
     packages.${system} = {
-      vm_example = vbox self.nixosConfigurations."vm_example".config;
-      vm_test = vbox self.nixosConfigurations."vm_example".config;
+      vm_example = vbox self.nixosConfigurations."example".config;
+      vm_test = vbox self.nixosConfigurations."test".config;
+      vm_system-shell = vbox self.nixosConfigurations."system-shell".config;
     };
 
   };

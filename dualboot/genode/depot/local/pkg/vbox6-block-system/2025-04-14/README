@@ -1,0 +1,8 @@
+
+      VirtualBox 6 runtime using 3 Block services for images of:
+
+* sda1 (bbp)
+* sda2 (efi) containing grub, mounted as /boot
+* sda4 (root) linux, formated as you desire, might be encrypted
+
+This package is derived from alex-ab/pkg/vbox6-block-2

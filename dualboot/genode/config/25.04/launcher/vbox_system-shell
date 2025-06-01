@@ -1,20 +1,8 @@
-<launcher ram="4300M" pkg="local/pkg/vbox6-block-system/2025-04-14" priority="-2">
+<launcher ram="4500M" pkg="local/pkg/vbox6-system/2025-04-28" priority="-2">
+  <affinity xpos="0" ypos="0" width="2" height="1"/><!-- 2 physical cores, 1 ht each -->
 	<route>
 		<service name="File_system" label_prefix="vm ->">
-			<!--<child name="ahci-0.3.fs" prepend_resource="/vm/block"/>-->
-			<child name="nvme-1.3.fs" prepend_resource="/vm/block"/>
-		</service>
-		<service name="Block" label="sda1">
-			<!--<child name="ahci-0.part" label="1"/>-->
-			<child name="nvme-1.part" label="1"/>
-		</service>
-		<service name="Block" label="sda2">
-			<!--<child name="ahci-0.part" label="2"/>-->
-			<child name="nvme-1.part" label="2"/>
-		</service>
-		<service name="Block" label="sda4">
-			<!--<child name="ahci-0.part" label="4"/>-->
-			<child name="nvme-1.part" label="4"/>
+			<child name="default_fs_rw" prepend_resource="/vm/system-shell"/>
 		</service>
 		<service name="File_system" label="config"> <parent label="config -> /"/> </service>
 		<service name="File_system" label="report"> <parent label="report -> /"/> </service>
@@ -38,8 +26,8 @@
 		<service name="ROM" label="platform_info">
 			<parent label="platform_info"/>
 		</service>
-		<service name="Report" label_last="shape">
-			<parent/>
+		<service name="Report" label="shape">
+			<child name="wm"/>
 		</service>
 		<service name="Report" label_last="clipboard">
 			<parent/>
