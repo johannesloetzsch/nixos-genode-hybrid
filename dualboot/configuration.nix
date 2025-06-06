@@ -14,6 +14,7 @@
       ../nix/shared/vboxsf.nix
     ];
 
+
   networking.hostName = "nixos-and-genode";  ## Define your hostname. Use the same name in flake.nix
   networking.hostId = "57d429f6";  ## Required for zfs
 
@@ -39,37 +40,6 @@
     device = "shared";
     noCheck = true;
     options = [ "nofail" ];
-  };
-
-
-  ## fallback in case mbr-pt.vmdk doesn't contain the expected partlabels
-  boot.initrd = {
-    preLVMCommands = lib.mkBefore ''
-      echo @@@ preLVMCommands @@@
-      [ -e /dev/sda4 ] && ! [ -e /dev/disk/by-partlabel/disk-main-luks ] && ln -s /dev/sda4 /dev/disk/by-partlabel/disk-main-luks && ls -l /dev/disk/by-partlabel/disk-main-luks
-      [ -e /dev/sda2 ] && ! [ -e /dev/disk/by-partlabel/disk-main-ESP ]  && ln -s /dev/sda2 /dev/disk/by-partlabel/disk-main-ESP  && ls -l /dev/disk/by-partlabel/disk-main-ESP
-      echo @@@ preLVMCommands @@@
-    '';
-    postResumeCommands = lib.mkAfter ''
-      echo @@@ postResumeCommands @@@
-      ## We change the zfs-clone to be used as / by modifying initrd-fsinfo depending on /proc/cmdline
-      cat /proc/cmdline
-
-      for o in $(cat /proc/cmdline); do
-        case $o in
-          fsinfo.root=*)
-            set -- $(IFS==; echo $o)
-            DEV=$2
-            DEV_ORIG="zroot/root"  ## TODO for now it is hardcoded, take it from fsinfo
-
-            sed -i "s@^$DEV_ORIG\$@$DEV@" /nix/store/*initrd-fsinfo
-            ;;
-        esac
-      done
-
-      cat /nix/store/*initrd-fsinfo
-      echo @@@ postResumeCommands @@@
-    '';
   };
 
 
