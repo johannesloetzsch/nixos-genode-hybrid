@@ -21,10 +21,10 @@
 
     ## The dualboot nixos host (bare metal nix or dualboot into the same machine on top of genode)
     nixosConfigurations."nixos-and-genode" = nixpkgs.legacyPackages.${system}.nixos [
-      #disko.nixosModules.disko ./dualboot/disko.nix
-      disko.nixosModules.disko ./dualboot/disko_luks_zfs.nix
+      disko.nixosModules.disko ./dualboot/disko.nix
+      # disko.nixosModules.disko ./dualboot/disko_luks_zfs.nix
       ./dualboot/configuration.nix
-      ./nix/shared/opinionated/neo2-keyboard.nix
+      # ./nix/shared/opinionated/neo2-keyboard.nix
     ];
 
 
