@@ -25,6 +25,8 @@
       # disko.nixosModules.disko ./dualboot/disko_luks_zfs.nix
       ./dualboot/configuration.nix
       # ./nix/shared/opinionated/neo2-keyboard.nix
+
+      ./mycustomconfig.nix
     ];
 
 
