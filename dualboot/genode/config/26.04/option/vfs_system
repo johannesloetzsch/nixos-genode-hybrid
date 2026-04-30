@@ -1,0 +1,15 @@
+option
++ child vfs_system | binary: vfs | ram: 2M | caps: 100
+  + provides | + fs
+  + config
+    + vfs 
+      + dir report | + fs | label: report -> /
+      + dir model  | + fs | label: model -> / | writeable: yes
+      + dir rw     | + fs | label: target -> / | writeable: yes
+    + default-policy | root: / | writeable: yes
+  + connect
+    + fs report      | + child report
+    + fs model       | + child model | identity: rw
+    + fs target      | + child default_fs_rw
+    + rom vfs.lib.so | + parent
+-

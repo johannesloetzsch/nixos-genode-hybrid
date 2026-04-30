@@ -1,0 +1,17 @@
+deploy | info: disposable web browser
++ option board   | required: yes
++ option sculpt  | required: yes
++ option managed | required: yes
++ option recall_fs
++ option window_manager
++ option black_hole
++ option mixer
++ option system_clock
++ child mesa_gpu-cpu | pkg: genodelabs/pkg/mesa_gpu-cpu/2026-04-16
+  + connect | + rm | + parent
++ option log_view
+x option system_shell
++ option audio
+x option vbox_system_shell
++ option vfs_system
+-

@@ -1,0 +1,24 @@
+option
++ child vbox6_block | pkg: local/pkg/vbox6_block/2026-04-16 | priority: -3
+  + connect
+    + fs vm               | + child default_fs_rw | prepend_resource: /recall/vbox6/vm/vbox_block
+    + fs shared           | + child vfs_system
+    + vm                  | + parent
+    + block | label_last: sda1 | + child | name: ahci-0.part | label: 1
+    + block | label_last: sda2 | + child | name: ahci-0.part | label: 2
+    + block | label_last: sda4 | + child | name: ahci-0.part | label: 4
+    + gpu                 | + child intel_gpu
+    + gui                 | + child wm
+    + nic                 | + child network
+    + rom capslock        | + child report | label: global_keys/capslock
+    + rom platform_info   | + parent | label: platform_info
+    + report shape        | + child wm
+    + report clipboard    | + child wm
+    + rom clipboard       | + child wm
+    + rom mesa_gpu.lib.so | + child mesa_gpu-cpu
+    + rm                  | + parent
+    + rtc                 | + child system_clock
+    + usb                 | + child usb
+    + play                | + child mixer
+    + record              | + child mixer
+-

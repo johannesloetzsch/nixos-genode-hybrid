@@ -1,0 +1,132 @@
+option
++ child platform | binary: init | caps: 1500 | ram: 32M | managing_system: yes
+  + provides
+    + platform
+    + platform nic
+    + platform wifi
+    + platform audio
+    + platform acpica
+  + connect
+    + io_mem            | + parent | . attached to hardware node in the graph
+    + io_port           | + parent
+    + irq               | + parent
+    + rom config        | + child model  | label: child/platform
+    + rom system        | + child model  | label: system
+    + rom sleep_states  | + child report | label: acpi_support/sleep_states
+    + report            | + child report
+    + rm                | + parent
+    + rom ld.lib.so     | + parent
+    + rom report_rom    | + parent
+    + rom rom_reporter  | + parent
+    + rom acpi          | + parent
+    + rom pci_decode    | + parent
+    + rom pc_platform   | + parent
+    + rom platform_info | + parent
++ child usb | binary: pc_usb_host | ram: 16M | caps: 200 | priority: media | enabled: yes
+  + managed | disable: while_suspended
+  + provides
+    + usb
+  + connect
+    + platform   | + child platform | label: usb
+    + report     | + child report
+    + rom config | + child model    | label: child/usb
++ child intel_gpu | binary: intel_gpu | ram: 32M | caps: 1400 | priority: media | enabled: yes
+  + managed | max_ram: 256M | max_caps: 5000
+  + provides
+    + gpu
+    + platform
+  + connect
+    + platform   | + child platform | label: intel_gpu
+    + rom config | + child model    | label: child/gpu
+    + rom system | + child model    | label: system
+    + rm         | + parent
++ child intel_fb | binary: pc_intel_fb | ram: 25071616 | caps: 800 | priority: media | enabled: yes
+  + managed | max_ram: 256M | max_caps: 5000 | disable: while_suspended
+  + heartbeat | restart_after_skipped: 2
+  + connect
+    + platform           | + child intel_gpu
+    + capture            | + child gui
+    + report             | + child report
+    + rom config         | + child model  | label: fb
+    + rom intel_opregion | + child report | label: platform/intel_opregion
+    + rm                 | + parent
++ child ps2 | binary: ps2 | ram: 1M | caps: 100 | priority: media | enabled: yes
+  + managed | disable: while_suspended
+  + config | capslock_led: rom | numlock_led: rom | system: yes
+  + connect
+    + platform     | + child platform     | label: ps2
+    + rom capslock | + child report       | label: global_keys/capslock
+    + rom numlock  | + child report       | label: global_keys/numlock
+    + rom system   | + child model        | label: system
+    + event        | + child event_filter | label: ps2
++ child ahci | binary: ahci | ram: 10M | caps: 100 | priority: media | enabled: yes
+  + managed | max_ram: 32M | max_caps: 500
+  + provides
+    + block
+  + config | system: yes
+    + report | ports: yes
+    + policy | label: 0 | device: 0 | writeable: yes
+    + policy | label: 1 | device: 1 | writeable: yes
+    + policy | label: 2 | device: 2 | writeable: yes
+    + policy | label: 3 | device: 3 | writeable: yes
+    + policy | label: 4 | device: 4 | writeable: yes
+    + policy | label: 5 | device: 5 | writeable: yes
+  + connect
+    + platform   | + child platform | label: ahci
+    + rom system | + child model    | label: system
+    + report     | + child report
++ child usb_hid | binary: usb_hid | ram: 11M | caps: 180 | priority: media | enabled: no
+  + config | capslock_led: rom | numlock_led: rom
+  + connect
+    + usb          | + child usb
+    + report       | + child report
+    + rom capslock | + child report | label: global_keys/capslock
+    + rom numlock  | + child report | label: global_keys/numlock
+    + event        | + child event_filter | label: usb_hid
++ child nic | binary: pc_nic | ram: 20M | caps: 300 | enabled: no
+  + managed | disable: while_suspended
+  + config
+  + connect
+    + platform    | + child platform | label: nic
+    + uplink      | + child network  | label: nic
+    + report      | + child report
+    + rm          | + parent
++ child wifi | binary: wifi | ram: 24M | caps: 260 | enabled: yes
+  + managed | disable: while_suspended
+  + config
+    + libc | stdout: /dev/log | stderr: /dev/null | rtc: /dev/rtc
+    + vfs
+      + dir dev
+        + null
+        + zero
+        + log
+        + null
+        + jitterentropy random
+        + jitterentropy urandom
+      + inline rtc | : 2018-01-01 00:01
+      + dir firmware
+        + tar pc_wifi_firmware.tar
+  + connect
+    + platform                      | + child platform | label: wifi
+    + uplink                        | + child network  | label: wifi
+    + report                        | + child report
+    + rom wifi_config               | + child model    | label: child/wifi
+    + rom libcrypto.lib.so          | + parent
+    + rom vfs.lib.so                | + parent
+    + rom libc.lib.so               | + parent
+    + rom libm.lib.so               | + parent
+    + rom vfs_jitterentropy.lib.so  | + parent
+    + rom libssl.lib.so             | + parent
+    + rom wifi.lib.so               | + parent | label: pc_wifi.lib.so
+    + rom pc_wifi_firmware.tar      | + parent
+    + rom wpa_driver_nl80211.lib.so | + parent
+    + rom wpa_supplicant.lib.so     | + parent
+    + rm                            | + parent
++ child usb_net | binary: usb_net | ram: 20M | caps: 200 | enabled: no
+  + config
+    + device | vendor_id: 0x2c7c | mac: 02:00:00:00:01:05
+  + connect
+    + usb    | + child usb
+    + report | + child report
+    + uplink | + child network | label: usb_net
+-
