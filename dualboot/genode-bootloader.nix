@@ -12,7 +12,7 @@
     enable = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
-    devices = ["/dev/disk/by-partlabel/disk-main-ESP"];
+    devices = [ "/dev/disk/by-partlabel/ESP" ];
     forceInstall = true;  # allow blocklists
     extraEntriesBeforeNixOS = true;
     extraEntries = ''

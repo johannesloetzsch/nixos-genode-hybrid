@@ -29,31 +29,27 @@ To achieve our goals, a disk layout similar to the setup described by [jschlatow
 Partition Table: gpt
 
 Number  Size     File system  Name             Flags
- 1      1 MB                  disk-main-BBP    bios_grub
- 2      512 MB   fat32        disk-main-ESP    boot, esp
+ 1      1 MB                  BBP              bios_grub
+ 2      512 MB   fat32        ESP              boot, esp
  3      100 GB   ext2         GENODE*
- 4      *        ext4         disk-main-NIXOS
+ 4      *        ext4 or zfs  disk-main-dom0
 ```
 
 * Genode requires a gpt partition table
 * Genode is persisted on a partition with the label `GENODE*`
 * Booting via EFI and legacy bios is possible by having a ESP and a BBP partition
 
-Declarative partitioning is provided by `./disko.nix` based on [hybrid.nix](https://raw.githubusercontent.com/nix-community/disko/refs/heads/master/example/hybrid.nix). To partition+format+mount use:
+Declarative partitioning is provided by [`modules/genode/disk.nix`](../modules/genode/disk.nix)
+(options `genode.disk.*`). To partition+format+mount use:
 
 ```bash
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount disko.nix
-nix shell nixpkgs#parted
-sudo parted /dev/${DISK} name 3 GENODE*
+sudo nix run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#nixos-and-genode
 ```
-
-The last command is required to change the partition label from `disk-main-GENODE` to `GENODE*`
 
 #### Luks, ZFS, …
 
-The 4th partition can be partitioned however you want.
-
-This repo contins an example on using Luks-encryption and ZFS: [`./disko_luks_zfs.nix`](./disko_luks_zfs.nix)
+The 4th partition is configured by `genode.disk.dom0`: `fs = "zfs"` (default) or `"ext4"`,
+LUKS on/off (`dom0.luks`), optional swap zvol (`dom0.zfs.swap.size`).
 
 
 ### NixOS installation + Bootloader

@@ -11,6 +11,7 @@ This repo provides tooling for:
 ## Installation
 
 The installing of NixOS is automated via disko+flake.nix.
+The disk layout lives in [`modules/genode/disk.nix`](./modules/genode/disk.nix) (`genode.disk.*`).
 
 Installing Sculpt OS is possible via a shell [script](./dualboot/install_sculpt.sh).
 

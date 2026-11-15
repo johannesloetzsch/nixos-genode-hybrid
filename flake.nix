@@ -19,10 +19,21 @@
   in
   {
 
+    nixosModules."genode-disk" = import ./modules/genode/disk.nix;
+
     ## The dualboot nixos host (bare metal nix or dualboot into the same machine on top of genode)
     nixosConfigurations."nixos-and-genode" = nixpkgs.legacyPackages.${system}.nixos [
-      #disko.nixosModules.disko ./dualboot/disko.nix
-      disko.nixosModules.disko ./dualboot/disko_luks_zfs.nix
+      disko.nixosModules.disko
+      self.nixosModules."genode-disk"
+      {
+        genode.disk.enable = true;
+        # fujitsu test disk: /dev/disk/by-id/ata-SAMSUNG_MZ7TY256HDHP-00000_S2YXNB0J406643
+        genode.disk.device = "/dev/nvme0n1";
+        genode.disk.esp.size = "512M";
+        genode.disk.genode.size = "100G";
+        genode.disk.dom0.luks.name = "crypted_nixos";
+        genode.disk.dom0.luks.passwordFile = "/tmp/secret.key";
+      }
       ./dualboot/configuration.nix
       ./nix/shared/opinionated/neo2-keyboard.nix
     ];
