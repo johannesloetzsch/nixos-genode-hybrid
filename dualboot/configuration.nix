@@ -11,11 +11,11 @@
       ./genode-bootloader.nix
 
       ../nix/shared/default.nix
-      ../nix/shared/vboxsf.nix
+      #../nix/shared/vboxsf.nix
     ];
 
 
-  networking.hostName = "nixos-and-genode";  ## Define your hostname. Use the same name in flake.nix
+  networking.hostName = "nixos-genode-hybrid";  ## Define your hostname. Use the same name in flake.nix
   networking.hostId = "57d429f6";  ## Required for zfs
 
   networking.networkmanager.enable = true;  ## Easiest to use and most distros use this by default.
@@ -35,12 +35,12 @@
   virtualisation.virtualbox.host.enable = true;
   boot.blacklistedKernelModules = [ "kvm_intel" ];
 
-  fileSystems."/genode" = {
-    fsType = "vboxsf";
-    device = "shared";
-    noCheck = true;
-    options = [ "nofail" ];
-  };
+  #fileSystems."/genode" = {
+  #  fsType = "vboxsf";
+  #  device = "shared";
+  #  noCheck = true;
+  #  options = [ "nofail" ];
+  #};
 
 
   specialisation."root2".configuration = {

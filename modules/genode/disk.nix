@@ -200,17 +200,21 @@ in
 
             genode = {
               size = cfg.genode.size;
-              label = "GENODE*";
+              label = "GENODE*"; # `*` marks it as Sculpt's default storage target
+              ## disko escapes non-alphanumerics uppercase (`\x2A`), udev lowercase
+              device = "/dev/disk/by-partlabel/GENODE\\x2a";
               content = {
                 type = "filesystem";
                 format = "ext2";
+                extraArgs = [ "-L" "GENODE" ];
                 mountpoint = cfg.genode.mountpoint;
-                mountOptions = [ "nofail" ];
+                ## mountOptions = [ "nofail" ];  ## TODO
               };
             };
 
             dom0 = {
               size = "100%";
+              label = "dom0";
               content = dom0;
             };
           };

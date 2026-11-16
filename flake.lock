@@ -21,6 +21,26 @@
         "type": "github"
       }
     },
+    "imports-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775868450,
+        "narHash": "sha256-yjve818wYVbkKUtbgXGwsxHyzt6rx+PraZ8bUijudKQ=",
+        "owner": "johannesloetzsch",
+        "repo": "imports.nix",
+        "rev": "5edbc7fe6dfcdf8e9adbf1a3b72fddc15f84b176",
+        "type": "github"
+      },
+      "original": {
+        "owner": "johannesloetzsch",
+        "repo": "imports.nix",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1736643958,
@@ -76,6 +96,7 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "imports-nix": "imports-nix",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs"
       }

@@ -30,9 +30,9 @@ Partition Table: gpt
 
 Number  Size     File system  Name             Flags
  1      1 MB                  BBP              bios_grub
- 2      512 MB   fat32        ESP              boot, esp
- 3      100 GB   ext2         GENODE*
- 4      *        ext4 or zfs  disk-main-dom0
+ 2      1 GB     fat32        ESP              boot, esp
+ 3      25 GB    ext2         GENODE*
+ 4      *        ext4 or zfs  dom0
 ```
 
 * Genode requires a gpt partition table
@@ -43,7 +43,7 @@ Declarative partitioning is provided by [`modules/genode/disk.nix`](../modules/g
 (options `genode.disk.*`). To partition+format+mount use:
 
 ```bash
-sudo nix run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#nixos-and-genode
+sudo nix run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#nixos-genode-hybrid
 ```
 
 #### Luks, ZFS, …
@@ -66,7 +66,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 Installation can be done via flake:
 
 ```bash
-sudo nixos-install --flake /mnt/etc/nixos#nixos-and-genode
+sudo nixos-install --flake /mnt/etc/nixos#nixos-genode-hybrid
 ## answer the prompt for a root password
 sudo reboot  ## boot into your new installed NixOS
 ```
@@ -83,12 +83,19 @@ imports = [ ./genode-bootloader.nix ];
 
 ### Genode installation
 
-To download, extract and copy Sculpt OS into the partition labeled `GENODE*` from any running linux run:
+Sculpt OS is installed by `genode.install` (`system.build.genodeInstall`, run by
+`genode-install.service` on every boot):
 
-```bash
-nix shell nixpkgs#p7zip
-sudo ./install_sculpt.sh
-```
+* the GENODE partition is seeded **once** with `genode.install.latestVersion`.
+  Once its `/boot` holds a system image, Sculpt OS owns that slot and replaces
+  it on its own on-target updates. Use `genode.install.force = true` (or run
+  `genode-install` with `--force`) to repair it.
+* the pinned versions (`latestVersion` plus `genode.install.extraVersions`) are
+  kept below `/sculpt/<version>/` on the ESP. Their `grub.cfg` is patched to
+  those paths, and versions that are no longer pinned are removed.
+
+The GRUB entries are `Genode (native)` (the slot managed by Sculpt OS),
+`Genode (<version> - latest)` and one `Genode (<version>)` per pinned version.
 
 
 ### Configure Genode
